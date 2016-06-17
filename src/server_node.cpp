@@ -19,13 +19,18 @@ int main (int argc, char** argv)
   ros::init(argc, argv, "server_node");
   ros::NodeHandle nh;
   //Testing package is working fine
-  cout << "Hello there! This node is listening on port 1024 for incoming connections" << endl;
-  int sockfd, newsockfd, portno = 1024; //Socket file descriptors and port number
+  int sockfd, newsockfd, portno; //Socket file descriptors and port number
   socklen_t clilen; //object clilen of type socklen_t
   char buffer[256]; //buffer array of size 256
   struct sockaddr_in serv_addr, cli_addr; ///two objects to store client and server address
   int n;
   ros::Duration d(0.01); // 100Hz
+  if (argc < 2) {
+    fprintf(stderr,"ERROR, no port provided\n");
+    exit(1);
+  }
+  portno = atoi(argv[1]);
+  cout << "Hello there! This node is listening on port " << portno << " for incoming connections" << endl;
   sockfd = socket(AF_INET, SOCK_STREAM, 0);
   if (sockfd < 0)
       error("ERROR opening socket");

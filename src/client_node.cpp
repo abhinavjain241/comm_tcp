@@ -23,7 +23,7 @@ int main(int argc, char *argv[]) {
     struct hostent *server;
     char buffer[256];
     if (argc < 3) {
-       fprintf(stderr,"usage %s hostname port\n", argv[0]);
+       fprintf(stderr,"Usage: $ rosrun win_comm_chat client_node <hostname> <port>\n");
        exit(0);
     }
     portno = atoi(argv[2]);
@@ -46,11 +46,6 @@ int main(int argc, char *argv[]) {
 	    n = write(sockfd,buffer,strlen(buffer));
 	    if (n < 0) 
 	         error("ERROR writing to socket");
-	    bzero(buffer,256);
-	    n = read(sockfd,buffer,255);
-	    if (n < 0) 
-	         error("ERROR reading from socket");
-	    printf("%s\n",buffer);
 	}
 	return 0;
 }

@@ -1,3 +1,14 @@
+ /*************************************************************************
+ * Author: Abhinav Jain
+ * Contact: abhinavjain241@gmail.com, abhinav.jain@heig-vd.ch
+ * Date: 28/06/2016
+ *
+ * This file contains source code to the client node of the ROS package
+ * win_comm_chat developed at LaRA (Laboratory of Robotics and Automation)
+ * as part of my project during an internship from May 2016 - July 2016.
+ *
+ * (C) All rights reserved. LaRA, HEIG-VD, 2016 (http://lara.populus.ch/)
+ ***************************************************************************/
 #include <ros/ros.h>
 #include <stdio.h>
 #include <stdlib.h>

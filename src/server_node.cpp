@@ -6,6 +6,7 @@
 #include <sys/types.h> 
 #include <sys/socket.h>
 #include <netinet/in.h>
+#include "std_msgs/String.h"
 
 using namespace std;
 
@@ -18,11 +19,14 @@ int main (int argc, char** argv)
 {
   ros::init(argc, argv, "server_node");
   ros::NodeHandle nh;
+  ros::Publisher server_pub = nh.advertise<std_msgs::String>("/server_messages/", 1000);
   //Testing package is working fine
   int sockfd, newsockfd, portno; //Socket file descriptors and port number
   socklen_t clilen; //object clilen of type socklen_t
   char buffer[256]; //buffer array of size 256
   struct sockaddr_in serv_addr, cli_addr; ///two objects to store client and server address
+  std_msgs::String message;
+  std::stringstream ss;
   int n;
   ros::Duration d(0.01); // 100Hz
   if (argc < 2) {
@@ -52,10 +56,15 @@ int main (int argc, char** argv)
   if (newsockfd < 0)
        error("ERROR on accept");
   while(ros::ok()) {
+     ss.str(std::string()); //Clear contents of string stream
      bzero(buffer,256);
      n = read(newsockfd,buffer,255);
      if (n < 0) error("ERROR reading from socket");
      printf("Here is the message: %s\n",buffer);
+     ss << buffer;
+     message.data = ss.str();
+     ROS_INFO("%s", message.data.c_str());
+     server_pub.publish(message);
      n = write(newsockfd,"I got your message",18);
      if (n < 0) error("ERROR writing to socket");
      //close(newsockfd);

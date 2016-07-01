@@ -18,6 +18,7 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <netdb.h> 
+#include "std_msgs/String.h"
 
 using namespace std;
 
@@ -26,9 +27,30 @@ void error(const char *msg) {
     exit(0);
 }
 
+class Listener {
+private:
+    char topic_message[256];
+public:
+    void callback(const std_msgs::String::ConstPtr& msg);
+    char* getMessageValue();
+};
+
+void Listener::callback(const std_msgs::String::ConstPtr& msg) {
+    memset(topic_message, 0, 256);
+    // printf("%s\n",msg->data.c_str());
+    strcpy(topic_message, msg->data.c_str());
+    ROS_INFO("I heard:[%s]", msg->data.c_str());
+}
+
+char* Listener::getMessageValue() {
+    return topic_message;
+}
+
 int main(int argc, char *argv[]) {
 	ros::init(argc, argv, "client_node");
 	ros::NodeHandle nh;
+    Listener listener;
+    ros::Subscriber client_sub = nh.subscribe("/client_messages", 1000, &Listener::callback, &listener);
 	int sockfd, portno, n;
     struct sockaddr_in serv_addr;
     struct hostent *server;
@@ -50,13 +72,16 @@ int main(int argc, char *argv[]) {
     serv_addr.sin_port = htons(portno);
     if (connect(sockfd,(struct sockaddr *) &serv_addr,sizeof(serv_addr)) < 0) 
         error("ERROR connecting");
+    // printf("%s\n", listener.getMessageValue());
 	while(ros::ok()) {
-		printf("Please enter the message: ");
+		// printf("Please enter the message: ");
 	    bzero(buffer,256);
-	    fgets(buffer,255,stdin);
+        strcpy(buffer, listener.getMessageValue());
+	    // fgets(buffer,255,stdin);
 	    n = write(sockfd,buffer,strlen(buffer));
 	    if (n < 0) 
 	         error("ERROR writing to socket");
+	    ros::spinOnce();
 	}
 	return 0;
 }

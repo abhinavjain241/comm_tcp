@@ -21,3 +21,9 @@ $ rosrun win_comm_chat server_node <port_number>
 ```
 $ rosrun win_comm_chat client_node <server_address> <port_number>
 ```
+
+TODO:
+=====
+- Refactor the sockets code (in C) to a more object oriented C++ version.
+- Refactor code according to C++ style guide convention.
+- Follow ROS package guidelines and hopefully publish package.

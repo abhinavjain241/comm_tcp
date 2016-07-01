@@ -20,7 +20,7 @@
 #include <netdb.h> 
 #include "std_msgs/String.h"
 
-using namespace std;
+#define MESSAGE_FREQ 1
 
 void error(const char *msg) {
     perror(msg);
@@ -29,7 +29,7 @@ void error(const char *msg) {
 
 class Listener {
 private:
-    char topic_message[256];
+    char topic_message[256] = { 0 };
 public:
     void callback(const std_msgs::String::ConstPtr& msg);
     char* getMessageValue();
@@ -37,7 +37,6 @@ public:
 
 void Listener::callback(const std_msgs::String::ConstPtr& msg) {
     memset(topic_message, 0, 256);
-    // printf("%s\n",msg->data.c_str());
     strcpy(topic_message, msg->data.c_str());
     ROS_INFO("I heard:[%s]", msg->data.c_str());
 }
@@ -49,9 +48,10 @@ char* Listener::getMessageValue() {
 int main(int argc, char *argv[]) {
 	ros::init(argc, argv, "client_node");
 	ros::NodeHandle nh;
-    Listener listener;
-    ros::Subscriber client_sub = nh.subscribe("/client_messages", 1000, &Listener::callback, &listener);
-	int sockfd, portno, n;
+    ros::Rate loop_rate(MESSAGE_FREQ); // set the rate as defined in the macro MESSAGE_FREQ
+	Listener listener;
+        ros::Subscriber client_sub = nh.subscribe("/client_messages", 1, &Listener::callback, &listener);
+    int sockfd, portno, n, choice = 1;
     struct sockaddr_in serv_addr;
     struct hostent *server;
     char buffer[256];
@@ -72,12 +72,17 @@ int main(int argc, char *argv[]) {
     serv_addr.sin_port = htons(portno);
     if (connect(sockfd,(struct sockaddr *) &serv_addr,sizeof(serv_addr)) < 0) 
         error("ERROR connecting");
-    // printf("%s\n", listener.getMessageValue());
+    std::cout << "How do you want the client to behave?:\n1. Be able to send messages manually\n2. Subscribe to /client_messages and send whatever's available there\nYour choice:";
+    std::cin >> choice;
 	while(ros::ok()) {
-		// printf("Please enter the message: ");
-	    bzero(buffer,256);
-        strcpy(buffer, listener.getMessageValue());
-	    // fgets(buffer,255,stdin);
+        bzero(buffer,256);
+        if (choice == 1) {
+            printf("Please enter the message: ");
+            fgets(buffer,255,stdin);
+        } else if (choice == 2) {
+            strcpy(buffer, listener.getMessageValue());
+            loop_rate.sleep();
+        }
 	    n = write(sockfd,buffer,strlen(buffer));
 	    if (n < 0) 
 	         error("ERROR writing to socket");

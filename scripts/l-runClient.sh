@@ -1,0 +1,1 @@
+rosrun win_comm_chat client_node $1 1024

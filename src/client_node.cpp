@@ -55,10 +55,14 @@ int main(int argc, char *argv[]) {
     struct sockaddr_in serv_addr;
     struct hostent *server;
     char buffer[256];
+    bool echoMode = false;
     if (argc < 3) {
-       fprintf(stderr,"Usage: $ rosrun comm_tcp client_node <hostname> <port>\n");
+       fprintf(stderr,"Usage: $ rosrun comm_tcp client_node <hostname> <port> --arguments\nArguments:\n -e : Echo mode\n");
        exit(0);
     }
+    if (argc > 3)
+		if (strcmp(argv[3], "-e") == 0)
+			echoMode = true;
     portno = atoi(argv[2]);
     sockfd = socket(AF_INET, SOCK_STREAM, 0);
     if (sockfd < 0) 
@@ -86,6 +90,13 @@ int main(int argc, char *argv[]) {
 	    n = write(sockfd,buffer,strlen(buffer));
 	    if (n < 0) 
 	         error("ERROR writing to socket");
+	    if (echoMode) {
+			bzero(buffer, 256);
+		    n = read(sockfd,buffer,255);
+		    if (n < 0)
+				error("ERROR reading reply");
+		    printf("%s\n", buffer);
+	    }
 	    ros::spinOnce();
 	}
 	return 0;

@@ -1,0 +1,5 @@
+site_name: Piaget2ROS / ROS2Piaget
+pages:
+  - Home: index.md
+  - About: about.md
+theme: readthedocs

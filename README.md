@@ -1,5 +1,5 @@
-win_comm_chat
-=============
+comm_tcp: Package in ROS for communication over TCP/IP
+=====================================================
 
 A ROS Catkin package with client and server nodes to communicate with other frameworks on different operating systems using TCP/IP.
 

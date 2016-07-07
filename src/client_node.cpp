@@ -4,7 +4,7 @@
  * Date: 28/06/2016
  *
  * This file contains source code to the client node of the ROS package
- * win_comm_chat developed at LaRA (Laboratory of Robotics and Automation)
+ * comm_tcp developed at LaRA (Laboratory of Robotics and Automation)
  * as part of my project during an internship from May 2016 - July 2016.
  *
  * (C) All rights reserved. LaRA, HEIG-VD, 2016 (http://lara.populus.ch/)
@@ -56,7 +56,7 @@ int main(int argc, char *argv[]) {
     struct hostent *server;
     char buffer[256];
     if (argc < 3) {
-       fprintf(stderr,"Usage: $ rosrun win_comm_chat client_node <hostname> <port>\n");
+       fprintf(stderr,"Usage: $ rosrun comm_tcp client_node <hostname> <port>\n");
        exit(0);
     }
     portno = atoi(argv[2]);

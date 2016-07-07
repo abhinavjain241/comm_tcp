@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <package>
-  <name>win_comm_chat</name>
-  <version>0.0.0</version>
-  <description>A package for communicating between ROS and Windows chat application.</description>
+  <name>comm_tcp</name>
+  <version>0.0.1</version>
+  <description>A package for communicating between ROS and other applications using TCP/IP protocol.</description>
 
   <!-- One maintainer tag required, multiple allowed, one person per tag --> 
   <!-- Example:  -->
@@ -13,13 +13,13 @@
   <!-- One license tag required, multiple allowed, one license per tag -->
   <!-- Commonly used license strings: -->
   <!--   BSD, MIT, Boost Software License, GPLv2, GPLv3, LGPLv2.1, LGPLv3 -->
-  <license>TODO</license>
+  <license>MIT</license>
 
 
   <!-- Url tags are optional, but mutiple are allowed, one per tag -->
   <!-- Optional attribute type can be: website, bugtracker, or repository -->
   <!-- Example: -->
-  <!-- <url type="website">http://wiki.ros.org/win_comm_chat</url> -->
+  <!-- <url type="website">http://wiki.ros.org/comm_tcp</url> -->
 
   <!-- Author tags are optional, mutiple are allowed, one per tag -->
   <!-- Authors do not have to be maintianers, but could be -->

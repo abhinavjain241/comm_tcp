@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <title>Piaget2ROS / ROS2Piaget</title>
+  
+
+  <link rel="shortcut icon" href="./img/favicon.ico">
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="./css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="./css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="./css/highlight.css">
+
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "None";
+    var mkdocs_page_input_path = "index.md";
+    var mkdocs_page_url = "/";
+  </script>
+  
+  <script src="./js/jquery-2.1.1.min.js"></script>
+  <script src="./js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="./js/highlight.pack.js"></script>
+  <script src="./js/theme.js"></script> 
+
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="." class="icon icon-home"> Piaget2ROS / ROS2Piaget</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="./search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        <ul class="current">
+          
+            <li>
+    <li class="toctree-l1 current">
+        <a class="current" href=".">Home</a>
+        
+            <ul>
+            
+                <li class="toctree-l3"><a href="#documentation-for-the-package-win_comm_chat">Documentation for the package win_comm_chat</a></li>
+                
+                    <li><a class="toctree-l4" href="#server_node">server_node</a></li>
+                
+                    <li><a class="toctree-l4" href="#client_node">client_node</a></li>
+                
+                    <li><a class="toctree-l4" href="#project-layout">Project layout</a></li>
+                
+                    <li><a class="toctree-l4" href="#references">References</a></li>
+                
+            
+            </ul>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="about/">About</a>
+        
+    </li>
+<li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href=".">Piaget2ROS / ROS2Piaget</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Home</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="documentation-for-the-package-win_comm_chat">Documentation for the package win_comm_chat</h1>
+<p>This website serves as a documentation for my project <strong>"Development of a transport layer/bridge for communication between Piaget and ROS"</strong> at <a href="http://heig-vd.ch/">HEIG-VD</a>.</p>
+<p>The project aims at connecting Piaget, the existing multi-agent framework for driving robots at the university to ROS, a very famous and prevalent robot middleware, to promote cross usage of packages and libraries between both environments.</p>
+<p>This directory contains the source code for a <a href="http://wiki.ros.org/Packages">ROS Package</a>, which has two nodes <a href="#server_node">server_node</a> and <a href="#client_node">client_node</a> allowing for bi-directional communication over TCP/IP to any other program using the same protocol over sockets.</p>
+<h2 id="server_node">server_node</h2>
+<p><strong>IMPORTANT:</strong> Make sure the ROS master is up and running before you start this node, else it won't start! (To start ROS master, run the following command: <code>$ roscore</code>)</p>
+<p>The server_node is a simple TCP/IP server written in C++ (more like C type) and integrated to this ROS package. To start, run the following command:</p>
+<pre><code class="sh">$ rosrun win_comm_chat server_node &lt;port_number&gt;
+</code></pre>
+
+<p>Replace the &lt;port_number> above by the port number that you want to start the server on. To communicate with Piaget, we'll use the port 1024, and so the command looks like this:</p>
+<pre><code class="sh">$ rosrun win_comm_chat server_node 1024
+</code></pre>
+
+<p>Once you run the above, the server should start listening to incoming connections on the specified port. Something like this:</p>
+<pre><code class="sh">Hello there! This node is listening on port 1024 for incoming connections
+</code></pre>
+
+<h2 id="client_node">client_node</h2>
+<p><strong>IMPORTANT:</strong> Make sure the ROS master is up and running before you start this node, else it won't start! (To start ROS master, run the following command: <code>$ roscore</code>)</p>
+<p>The client_node is a TCP/IP client written in C++ (more like C type) and integrated to this ROS package. To start, run the following command:</p>
+<pre><code class="sh">$ rosrun win_comm_chat client_node &lt;server_address&gt; &lt;port_number&gt;
+</code></pre>
+
+<p>Replace the &lt;server_address> by the IP address or hostname of the server and the &lt;port_number> by the port that it's listening on. To communicate with Piaget, we'll use the port 1024 (and assume the server is running on the computer c38pc06), and so the command looks like this:</p>
+<pre><code class="sh">$ rosrun win_comm_chat client_node c38pc06 1024
+</code></pre>
+
+<p>Once you run the above, the server should start listening to incoming connections on the specified port. Something like this:</p>
+<pre><code class="sh">Hello there! This node is listening on port 1024 for incoming connections
+</code></pre>
+
+<h2 id="project-layout">Project layout</h2>
+<pre><code>mkdocs.yml    # The configuration file.
+docs/
+    index.md  # The documentation homepage.
+    ...       # Other markdown pages, images and other files.
+</code></pre>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="http://www.linuxhowtos.org/C_C++/socket.htm">C/C++ Sockets</a></li>
+<li><a href="http://answers.ros.org/question/52107/how-can-i-do-a-networking-between-ros-linux-and-a-c-program-running-on-windows/">How can I do a Networking between ROS (Linux) and a C++ Program running on Windows?</a></li>
+<li><a href=""></a></li>
+<li><a href=""></a></li>
+<li><a href=""></a></li>
+</ul>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="about/" class="btn btn-neutral float-right" title="About">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+<div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+      
+        <span style="margin-left: 15px"><a href="about/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+
+</body>
+</html>
+
+<!--
+MkDocs version : 0.15.3
+Build Date UTC : 2016-07-07 17:23:35.903701
+-->

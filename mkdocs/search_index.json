@@ -1,0 +1,39 @@
+{
+    "docs": [
+        {
+            "location": "/", 
+            "text": "Documentation for the package win_comm_chat\n\n\nThis website serves as a documentation for my project \n\"Development of a transport layer/bridge for communication between Piaget and ROS\"\n at \nHEIG-VD\n.\n\n\nThe project aims at connecting Piaget, the existing multi-agent framework for driving robots at the university to ROS, a very famous and prevalent robot middleware, to promote cross usage of packages and libraries between both environments.\n\n\nThis directory contains the source code for a \nROS Package\n, which has two nodes \nserver_node\n and \nclient_node\n allowing for bi-directional communication over TCP/IP to any other program using the same protocol over sockets.\n\n\nserver_node\n\n\nIMPORTANT:\n Make sure the ROS master is up and running before you start this node, else it won't start! (To start ROS master, run the following command: \n$ roscore\n)\n\n\nThe server_node is a simple TCP/IP server written in C++ (more like C type) and integrated to this ROS package. To start, run the following command:\n\n\n$ rosrun win_comm_chat server_node \nport_number\n\n\n\n\n\nReplace the \nport_number> above by the port number that you want to start the server on. To communicate with Piaget, we'll use the port 1024, and so the command looks like this:\n\n\n$ rosrun win_comm_chat server_node 1024\n\n\n\n\nOnce you run the above, the server should start listening to incoming connections on the specified port. Something like this:\n\n\nHello there! This node is listening on port 1024 for incoming connections\n\n\n\n\nclient_node\n\n\nIMPORTANT:\n Make sure the ROS master is up and running before you start this node, else it won't start! (To start ROS master, run the following command: \n$ roscore\n)\n\n\nThe client_node is a TCP/IP client written in C++ (more like C type) and integrated to this ROS package. To start, run the following command:\n\n\n$ rosrun win_comm_chat client_node \nserver_address\n \nport_number\n\n\n\n\n\nReplace the \nserver_address> by the IP address or hostname of the server and the \nport_number> by the port that it's listening on. To communicate with Piaget, we'll use the port 1024 (and assume the server is running on the computer c38pc06), and so the command looks like this:\n\n\n$ rosrun win_comm_chat client_node c38pc06 1024\n\n\n\n\nOnce you run the above, the server should start listening to incoming connections on the specified port. Something like this:\n\n\nHello there! This node is listening on port 1024 for incoming connections\n\n\n\n\nProject layout\n\n\nmkdocs.yml    # The configuration file.\ndocs/\n    index.md  # The documentation homepage.\n    ...       # Other markdown pages, images and other files.\n\n\n\nReferences\n\n\n\n\nC/C++ Sockets\n\n\nHow can I do a Networking between ROS (Linux) and a C++ Program running on Windows?", 
+            "title": "Home"
+        }, 
+        {
+            "location": "/#documentation-for-the-package-win_comm_chat", 
+            "text": "This website serves as a documentation for my project  \"Development of a transport layer/bridge for communication between Piaget and ROS\"  at  HEIG-VD .  The project aims at connecting Piaget, the existing multi-agent framework for driving robots at the university to ROS, a very famous and prevalent robot middleware, to promote cross usage of packages and libraries between both environments.  This directory contains the source code for a  ROS Package , which has two nodes  server_node  and  client_node  allowing for bi-directional communication over TCP/IP to any other program using the same protocol over sockets.", 
+            "title": "Documentation for the package win_comm_chat"
+        }, 
+        {
+            "location": "/#server_node", 
+            "text": "IMPORTANT:  Make sure the ROS master is up and running before you start this node, else it won't start! (To start ROS master, run the following command:  $ roscore )  The server_node is a simple TCP/IP server written in C++ (more like C type) and integrated to this ROS package. To start, run the following command:  $ rosrun win_comm_chat server_node  port_number   Replace the  port_number> above by the port number that you want to start the server on. To communicate with Piaget, we'll use the port 1024, and so the command looks like this:  $ rosrun win_comm_chat server_node 1024  Once you run the above, the server should start listening to incoming connections on the specified port. Something like this:  Hello there! This node is listening on port 1024 for incoming connections", 
+            "title": "server_node"
+        }, 
+        {
+            "location": "/#client_node", 
+            "text": "IMPORTANT:  Make sure the ROS master is up and running before you start this node, else it won't start! (To start ROS master, run the following command:  $ roscore )  The client_node is a TCP/IP client written in C++ (more like C type) and integrated to this ROS package. To start, run the following command:  $ rosrun win_comm_chat client_node  server_address   port_number   Replace the  server_address> by the IP address or hostname of the server and the  port_number> by the port that it's listening on. To communicate with Piaget, we'll use the port 1024 (and assume the server is running on the computer c38pc06), and so the command looks like this:  $ rosrun win_comm_chat client_node c38pc06 1024  Once you run the above, the server should start listening to incoming connections on the specified port. Something like this:  Hello there! This node is listening on port 1024 for incoming connections", 
+            "title": "client_node"
+        }, 
+        {
+            "location": "/#project-layout", 
+            "text": "mkdocs.yml    # The configuration file.\ndocs/\n    index.md  # The documentation homepage.\n    ...       # Other markdown pages, images and other files.", 
+            "title": "Project layout"
+        }, 
+        {
+            "location": "/#references", 
+            "text": "C/C++ Sockets  How can I do a Networking between ROS (Linux) and a C++ Program running on Windows?", 
+            "title": "References"
+        }, 
+        {
+            "location": "/about/", 
+            "text": "", 
+            "title": "About"
+        }
+    ]
+}

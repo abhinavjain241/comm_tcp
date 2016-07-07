@@ -1,5 +1,5 @@
-comm_tcp: Package in ROS for communication over TCP/IP
-=====================================================
+comm_tcp: Package in ROS for TCP/IP communication
+=================================================
 
 A ROS Catkin package with client and server nodes to communicate with other frameworks on different operating systems using TCP/IP.
 
@@ -13,13 +13,21 @@ Once the master is up, run the following commands:
 **For Server Node:**
 (Replace 'port_number' by the specific port)
 ```
-$ rosrun win_comm_chat server_node <port_number>
+$ rosrun comm_tcp server_node <port_number>
+```
+To communicate with Piaget, simply run the script [l-runServer.sh](scripts/l-runServer.sh) present in the scripts directory.
+```
+$ ./scripts/l-runServer.sh
 ```
 
 **For Client Node:**
 (Replace 'server_address' and 'port_number' by the correct values)
 ```
-$ rosrun win_comm_chat client_node <server_address> <port_number>
+$ rosrun comm_tcp client_node <server_address> <port_number>
+```
+To communicate with Piaget, simply run the script [l-runClient.sh](scripts/l-runClient.sh) present in the scripts directory.
+```
+$ ./scripts/l-runClient.sh <server_address>
 ```
 
 TODO:
